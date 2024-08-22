@@ -5,9 +5,9 @@ const Blogs = () => {
 
   useEffect(() => {
     fetch(
-      "https://newsapi.org/v2/everything?q=bitcoin&apiKey=65b45edc0d5d4f90ad82ceb6327218d5"
+      "https://newsapi.org/v2/everything?q=bitcoin&apiKey=65b45edc0d5d4f90ad82ceb6327218d5&pageSize=5"
     )
-      .then((response) => response.json())
+     .then((response) => response.json())
       .then((data) => {
         setBlogs(data.articles);
         console.log("this is what i logging", data);
@@ -30,16 +30,17 @@ const Blogs = () => {
       <hr className="my-2 pb-10 border-gray-600 "/>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {blogs && blogs.map((blog, index) => (
-          <div key={index} className="flex flex-col">
+          <div key={index} className="flex flex-col p-5 bg-slate-200 rounded-lg">
               <img src={blog.urlToImage} alt="" />
-            <h2>{blog.title}</h2>
+             <h2 className="font-bold">{blog.title}</h2> 
+            <h3>{blog.content}</h3> 
+           <h4>{blog.description} </h4> 
+             <h5>{blog.id}</h5> 
+             <p>{blog.author}</p>
+              <h6>{blog.publishedAt}</h6>  
             
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Laudantium, assumenda!
-            </p>
-            <button className="px-5 py-2 bg-gray-600 text-white hover:bg-gray-500 
-        focus:outline-none focus:ring-5 focus:ring-gray-500 focus:ring-offset-5">Read</button>
+            <a href={blog.url} className="px-5 py-2 bg-gray-600 text-white hover:bg-gray-500 
+        focus:outline-none focus:ring-5 focus:ring-gray-500 focus:ring-offset-5">Read</a>
           </div>
         ))}
       </div>
